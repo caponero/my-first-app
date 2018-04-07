@@ -16,14 +16,26 @@ export class AppComponent {
   ]
 
   showForm = false;
+  edicion = false;
 
 	addNote(){
+		this.note = {id:null, title:null, description:null};
+		this.edicion = false;
 		this.showForm = true;
 	  }
 
 
-	viewNote(){
+	viewNote(note){
+		this.edicion = true;
 		this.showForm = true;
+		this.note = note;
+	}
+
+	delete(note){
+		var me = this;
+		this.my_notes.forEach((el, i) => if (me.note == el){me.my_notes.splice(i, 1)})
+		this.note = {id:null, title:null, description:null};
+		this.showForm = false;
 	}
 
 	cancel(){
@@ -31,7 +43,18 @@ export class AppComponent {
 	  }
 
 	createNote(){
-				this.note.id = Date.now();
+		if (this.edicion){
+			var me = this;
+			this.my_notes.forEach((el, i) => {
+				if (me.note.id == el.i){
+					this.my_notes[i] = me.note
+				}
+			}) 
+			this.showForm = false;
+		}
+		else{
+		
+			this.note.id = Date.now();
 			this.my_notes.push(this.note);
 			this.note = {id:null, title:null, description:null};
 			this.showForm = false;
