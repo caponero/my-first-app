@@ -31,35 +31,42 @@ export class AppComponent {
 		this.note = note;
 	}
 
-	delete(note){
+	delete(note)
+	{
 		var me = this;
-		this.my_notes.forEach((el, i) => if (me.note == el){me.my_notes.splice(i, 1)})
+		this.my_notes.forEach((el, i) => {if (me.note == el){me.my_notes.splice(i, 1)}})
 		this.note = {id:null, title:null, description:null};
-		this.showForm = false;
+		this.showForm = false
 	}
 
-	cancel(){
+	cancel()
+	{
 	  	this.showForm = false;
 	  }
 
-	createNote(){
-		if (this.edicion){
+	createNote()
+	{
+		if (this.edicion)
+		{
 			var me = this;
 			this.my_notes.forEach((el, i) => {
-				if (me.note.id == el.i){
-					this.my_notes[i] = me.note
-				}
-			}) 
+					if (me.note.id == el.id){
+						this.my_notes[i] = me.note
+					}
+					
+				}) 
 			this.showForm = false;
 		}
-		else{
+		else
+		{
 		
 			this.note.id = Date.now();
 			this.my_notes.push(this.note);
 			this.note = {id:null, title:null, description:null};
 			this.showForm = false;
 		
-	}
+		}
 
+	}
 }
 
